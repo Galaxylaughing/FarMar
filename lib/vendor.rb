@@ -25,5 +25,9 @@ module FarMar
       end
     end
     
+    def self.find(vendor_id)
+      return all.find { |vendor| vendor.id == vendor_id }
+    end
+    
   end
 end

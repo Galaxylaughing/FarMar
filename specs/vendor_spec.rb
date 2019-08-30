@@ -76,8 +76,23 @@ describe "Vendor" do
     end
   end
   
-  # self.find(id): returns an instance of the object where the value of the id field in the CSV matches the passed parameter.
   describe ".find" do
+    it "returns `nil` if no Vendor is found" do
+      vendor = FarMar::Vendor.find(123456)
+      expect(vendor).must_be_nil
+    end
+    
+    it "can find the first Vendor" do
+      vendor = FarMar::Vendor.find(1)
+      expect(vendor).must_be_instance_of FarMar::Vendor
+      expect(vendor.id).must_equal 1
+    end
+    
+    it "can find the last Vendor" do
+      vendor = FarMar::Vendor.find(2690)
+      expect(vendor).must_be_instance_of FarMar::Vendor
+      expect(vendor.id).must_equal 2690
+    end
   end  
   
 end
