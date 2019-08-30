@@ -12,6 +12,16 @@ module FarMar
       @vendor_id = vendor_id
     end
     
+    def self.all
+      return CSV.read("support/products.csv").map do |line|
+        Product.new(
+          line[0].to_i, #id
+          line[1], #name
+          vendor_id: line[2].to_i
+        )
+      end
+    end
+    
     private
     
     def expect_positive_int(variable)

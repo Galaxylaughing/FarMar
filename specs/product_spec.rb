@@ -57,4 +57,37 @@ describe "Product" do
     
   end
   
+  describe ".all" do
+    let(:products_list) {
+      FarMar::Product.all
+    }
+    
+    it "returns an array" do
+      expect(products_list).must_be_instance_of Array
+    end
+    
+    it "returns a collection of Products" do
+      expect(products_list.length).must_be :>, 0
+      products_list.each do |product_in_list|
+        expect(product_in_list).must_be_instance_of FarMar::Product
+      end
+    end
+    
+    it "returns the correct number of Products" do
+      expect(products_list.length).must_equal 8193
+    end
+    
+    it "gets the first Product from the file" do
+      expect(products_list.first.id).must_equal 1
+    end
+    
+    it "gets the last Product from the file" do
+      expect(products_list.last.id).must_equal 8193
+    end
+    
+  end
+  
+  describe ".find" do
+  end
+  
 end
