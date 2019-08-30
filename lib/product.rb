@@ -22,6 +22,10 @@ module FarMar
       end
     end
     
+    def self.find(product_id)
+      return all.find { |product| product.id == product_id }
+    end
+    
     private
     
     def expect_positive_int(variable)

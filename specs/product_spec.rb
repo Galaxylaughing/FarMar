@@ -88,6 +88,22 @@ describe "Product" do
   end
   
   describe ".find" do
+    it "returns `nil` if no Product is found" do
+      product = FarMar::Product.find(1234567)
+      expect(product).must_be_nil
+    end
+    
+    it "can find the first Vendor" do
+      product = FarMar::Product.find(1)
+      expect(product).must_be_instance_of FarMar::Product
+      expect(product.id).must_equal 1
+    end
+    
+    it "can find the last Vendor" do
+      product = FarMar::Product.find(8193)
+      expect(product).must_be_instance_of FarMar::Product
+      expect(product.id).must_equal 8193
+    end
   end
   
 end
