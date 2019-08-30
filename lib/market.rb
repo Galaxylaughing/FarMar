@@ -18,9 +18,8 @@ module FarMar
     end
     
     def self.all()
-      markets = []
-      CSV.foreach ("support/markets.csv") do |line|
-        markets << Market.new(
+      return CSV.read("support/markets.csv").map do |line|
+        Market.new(
           line[0].to_i, #id
           line[1], #name
           line[2], #address
@@ -30,7 +29,6 @@ module FarMar
           line[6] #zip
         )
       end
-      return markets
     end
     
     def self.find(market_id)
