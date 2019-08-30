@@ -59,11 +59,6 @@ describe "Market" do # describe block for each class
       }.must_raise ArgumentError
     end
     
-    # it "keeps track of ID" do
-    #   expect(market).must_respond_to :id
-    #   expect(market.id).must_be :>, 
-    # end
-    
   end
   
 end
