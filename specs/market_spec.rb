@@ -47,6 +47,7 @@ describe "Market" do # describe block for each class
       expect(market.zip).must_equal "97202"
     end
     
+    # verifies that the ID is the correct format
     it "requires an integer ID" do
       proc {
         FarMar::Market.new("1337", "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
