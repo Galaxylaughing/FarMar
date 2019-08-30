@@ -4,4 +4,8 @@ describe "tests" do
   it "should run some tests" do
     true.must_equal false
   end
+  
+  it "should have access to stuff from market.rb" do
+    DAN_CONSTANT.must_equal 42
+  end
 end

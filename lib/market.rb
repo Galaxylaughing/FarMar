@@ -1,0 +1,1 @@
+DAN_CONSTANT = 42
