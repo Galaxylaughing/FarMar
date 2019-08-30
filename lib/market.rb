@@ -17,5 +17,21 @@ module FarMar
       @zip = zip
     end
     
+    def self.all()
+      markets = []
+      CSV.foreach ("support/markets.csv") do |line|
+        markets << Market.new(
+          line[0].to_i, #id
+          line[1], #name
+          line[2], #address
+          line[3], #city
+          line[4], #county
+          line[5], #state
+          line[6] #zip
+        )
+      end
+      return markets
+    end
+    
   end
 end

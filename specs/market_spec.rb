@@ -62,4 +62,37 @@ describe "Market" do # describe block for each class
     
   end
   
+  describe "#all" do
+    let(:markets_list) {
+      FarMar::Market.all
+    }
+    
+    it "returns an array" do
+      expect(markets_list).must_be_instance_of Array
+    end
+    
+    it "returns a collection of Markets" do
+      # must run `.each` loop at least once
+      expect(markets_list.length).must_be :>, 0
+      markets_list.each do |market_in_list|
+        expect(market_in_list).must_be_instance_of FarMar::Market
+      end
+    end
+    
+    it "returns the correct number of Markets" do
+      expect(markets_list.length).must_equal 500
+    end
+    
+    it "gets the first Market from the file" do
+      expect(markets_list.first.id).must_equal 1
+    end
+    
+    it "gets the last Market from the file" do
+      expect(markets_list.last.id).must_equal 500
+    end
+  end
+  
+  describe "#find" do
+  end
+  
 end
