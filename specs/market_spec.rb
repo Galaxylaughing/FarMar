@@ -4,7 +4,7 @@ describe "Market" do # describe block for each class
   
   describe "#initialize" do # describe block for each function
     let(:market) {
-      market = FarMar::Market.new(1337, "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
+      FarMar::Market.new(1337, "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
     }
     
     it "creates an instance of Market" do
@@ -46,6 +46,23 @@ describe "Market" do # describe block for each class
       expect(market).must_respond_to :zip
       expect(market.zip).must_equal "97202"
     end
+    
+    it "requires an integer ID" do
+      proc {
+        FarMar::Market.new("1337", "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
+      }.must_raise ArgumentError
+    end
+    
+    it "requires a positive integer ID" do
+      proc {
+        FarMar::Market.new(-1337, "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
+      }.must_raise ArgumentError
+    end
+    
+    # it "keeps track of ID" do
+    #   expect(market).must_respond_to :id
+    #   expect(market.id).must_be :>, 
+    # end
     
   end
   
