@@ -33,5 +33,9 @@ module FarMar
       return markets
     end
     
+    def self.find(market_id)
+      return all.find { |market| market.id == market_id }
+    end
+    
   end
 end

@@ -62,7 +62,7 @@ describe "Market" do # describe block for each class
     
   end
   
-  describe "#all" do
+  describe ".all" do
     let(:markets_list) {
       FarMar::Market.all
     }
@@ -92,7 +92,23 @@ describe "Market" do # describe block for each class
     end
   end
   
-  describe "#find" do
+  describe ".find" do
+    it "returns `nil` if no Market is found" do
+      market = FarMar::Market.find(12345)
+      expect(market).must_be_nil
+    end
+    
+    it "can find the first Market" do
+      market = FarMar::Market.find(1)
+      expect(market).must_be_instance_of FarMar::Market
+      expect(market.zip).must_equal "97202"
+    end
+    
+    it "can find the last Market" do
+      market = FarMar::Market.find(500)
+      expect(market).must_be_instance_of FarMar::Market
+      expect(market.zip).must_equal "10467"
+    end
   end
   
 end
