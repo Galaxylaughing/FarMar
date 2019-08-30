@@ -47,4 +47,37 @@ describe "Vendor" do
     
   end
   
+  describe ".all" do
+    let(:vendors_list) {
+      FarMar::Vendor.all
+    }
+    
+    it "returns an array" do
+      expect(vendors_list).must_be_instance_of Array
+    end
+    
+    it "returns a collection of Vendors" do
+      expect(vendors_list.length).must_be :>, 0
+      vendors_list.each do |vendor_in_list|
+        expect(vendor_in_list).must_be_instance_of FarMar::Vendor
+      end
+    end
+    
+    it "returns the correct number of Vendors" do
+      expect(vendors_list.length).must_equal 2690
+    end
+    
+    it "gets the first Vendor from the file" do
+      expect(vendors_list.first.id).must_equal 1
+    end
+    
+    it "gets the last Vendor from the file" do
+      expect(vendors_list.last.id).must_equal 2690
+    end
+  end
+  
+  # self.find(id): returns an instance of the object where the value of the id field in the CSV matches the passed parameter.
+  describe ".find" do
+  end  
+  
 end

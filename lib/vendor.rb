@@ -14,5 +14,16 @@ module FarMar
       @market_id = market_id
     end
     
+    def self.all
+      return CSV.read("support/vendors.csv").map do |line|
+        Vendor.new(
+          line[0].to_i, #id
+          line[1], #name
+          num_employees: line[2].to_i,
+          market_id: line[3].to_i
+        )
+      end
+    end
+    
   end
 end
