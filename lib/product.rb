@@ -12,6 +12,10 @@ module FarMar
       @vendor_id = vendor_id
     end
     
+    def vendor()
+      Vendor.find(vendor_id)
+    end
+    
     def self.all
       return CSV.read("support/products.csv").map do |line|
         Product.new(

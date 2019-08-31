@@ -57,6 +57,25 @@ describe "Product" do
     
   end
   
+  describe "#vendor" do
+    it "returns a Vendor instance with the correct ID" do
+      product = FarMar::Product.new(1337, "Eager Carrots", vendor_id: 10)
+      vendor = product.vendor
+      expect(vendor).must_be_instance_of FarMar::Vendor
+      expect(vendor.id).must_equal product.vendor_id
+    end
+    
+    it "returns `nil` when the vendor_id does not correspond to a Vendor" do
+      # assumption: there is no vender 10_000
+      nonexistent_vendor_id = 10_000
+      FarMar::Vendor.find(nonexistent_vendor_id).must_be_nil "Whoops, didn't expect that vendor #{nonexistent_vendor_id} to exist, which invalidates this test"
+      
+      product = FarMar::Product.new(1337, "Eager Carrots", vendor_id: nonexistent_vendor_id)
+      vendor = product.vendor
+      expect(vendor).must_be_nil   
+    end
+  end
+  
   describe ".all" do
     let(:products_list) {
       FarMar::Product.all
