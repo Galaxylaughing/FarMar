@@ -22,8 +22,6 @@ module FarMar
       return Market.find(self.market_id)
     end
     
-    # self.by_market(market_id) --> returns all of the vendors with the given market_id
-    
     def self.all
       return CSV.read("support/vendors.csv").map do |line|
         Vendor.new(
@@ -37,6 +35,11 @@ module FarMar
     
     def self.find(vendor_id)
       return all.find { |vendor| vendor.id == vendor_id }
+    end
+    
+    def self.find_by_market(market_id)
+      return nil unless Market.find(market_id)
+      return Vendor.all.select { |vendor| vendor.market_id == market_id}
     end
     
   end

@@ -158,4 +158,36 @@ describe "Vendor" do
     end
   end  
   
+  describe ".find_by_market" do
+    let(:vendor_list) {
+      FarMar::Vendor.find_by_market(2)
+    }
+    
+    it "returns `nil` for a nonexistent market ID" do
+      # Assumption: no market with an ID of 4,000 exists.
+      nonexistent_id = 4_000
+      expect(FarMar::Vendor.find_by_market(nonexistent_id)).must_be_nil
+    end
+    
+    it "returns a collection of Vendors" do
+      expect(vendor_list.length).must_be :>, 0
+      expect(vendor_list).must_be_instance_of Array
+      vendor_list.each do |single_vendor|
+        expect(single_vendor).must_be_instance_of FarMar::Vendor
+      end
+    end
+    
+    it "returns the correct number of Vendors" do
+      # will break if more Vendors are added to the market with the ID of 2
+      expect(vendor_list.length).must_equal 3
+    end
+    
+    it "returns only Vendors with a given market ID" do
+      vendor_list.each do |single_vendor|
+        expect(single_vendor.market_id).must_equal 2
+      end
+    end
+    
+  end
+  
 end
