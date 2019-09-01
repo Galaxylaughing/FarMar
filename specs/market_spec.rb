@@ -62,6 +62,32 @@ describe "Market" do # describe block for each class
     
   end
   
+  describe "#vendors" do
+    # returns a list of all vendors with the market_id of the market instance
+    let(:market) {
+      FarMar::Market.new(1, "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
+    }
+    
+    it "returns an empty array for a Market with no vendors" do
+      vendorless_market = FarMar::Market.new(1337, "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
+      expect(vendorless_market.vendors).must_be_instance_of Array
+      expect(vendorless_market.vendors).must_be_empty
+    end
+    
+    it "returns a collection of Vendors" do
+      expect(market.vendors.length).must_be :>, 0
+      expect(market.vendors).must_be_instance_of Array
+      market.vendors.each do |single_vendor|
+        expect(single_vendor).must_be_instance_of FarMar::Vendor
+      end
+    end
+    
+    it "returns the right number of Vendors" do
+      expect(market.vendors.length).must_equal 6
+    end
+    
+  end
+  
   describe ".all" do
     let(:markets_list) {
       FarMar::Market.all

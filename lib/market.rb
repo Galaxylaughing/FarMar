@@ -17,6 +17,10 @@ module FarMar
       @zip = zip
     end
     
+    def vendors()
+      return Vendor.all.select { |vendor| vendor.market_id == id}
+    end
+    
     def self.all()
       return CSV.read("support/markets.csv").map do |line|
         Market.new(
