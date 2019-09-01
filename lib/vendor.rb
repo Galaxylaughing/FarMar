@@ -18,6 +18,12 @@ module FarMar
       return Product.find_by_vendor(id)
     end
     
+    def market()
+      return Market.find(self.market_id)
+    end
+    
+    # self.by_market(market_id) --> returns all of the vendors with the given market_id
+    
     def self.all
       return CSV.read("support/vendors.csv").map do |line|
         Vendor.new(

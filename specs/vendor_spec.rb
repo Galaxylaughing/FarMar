@@ -95,6 +95,21 @@ describe "Vendor" do
     
   end
   
+  describe "#market" do
+    let(:vendor) {
+      FarMar::Vendor.new(6, "Zulauf and Sons", num_employees: 8, market_id: 1)
+    }
+    
+    it "returns a Market instance" do
+      expect(vendor.market).must_be_instance_of FarMar::Market
+    end
+    
+    it "returns the Market instance associated with the vendor" do
+      expect(vendor.market.vendors.last.id).must_equal 6
+    end
+    
+  end
+  
   describe ".all" do
     let(:vendors_list) {
       FarMar::Vendor.all
