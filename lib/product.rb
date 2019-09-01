@@ -30,6 +30,10 @@ module FarMar
       return all.find { |product| product.id == product_id }
     end
     
+    def self.find_by_vendor(vendor_id)
+      return all.select { |product| product.vendor_id == vendor_id }
+    end
+    
     private
     
     def expect_positive_int(variable)

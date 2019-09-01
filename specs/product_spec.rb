@@ -125,4 +125,49 @@ describe "Product" do
     end
   end
   
+  describe ".find_by_vendor" do
+    
+    it "does something if the vendor_id is invalid" do
+      invalid_vendor_id = "not an ID"
+      products_list = FarMar::Product.find_by_vendor(invalid_vendor_id)
+      expect(products_list).must_be_instance_of Array
+      expect(products_list).must_be_empty
+    end
+    
+    it "returns empty array if vendor has no products" do
+      # Assumption: no products have a vendor ID of 10,000
+      vendor_id = 10_000
+      products_list = FarMar::Product.find_by_vendor(vendor_id)
+      expect(products_list).must_be_instance_of Array
+      expect(products_list).must_be_empty
+    end
+    
+    it "returns an array of one if vendor has one product" do
+      # data =  4,Yummy Fruit,3
+      vendor_id = 3
+      product_list = FarMar::Product.find_by_vendor(vendor_id)
+      expect(product_list).must_be_instance_of Array
+      expect(product_list.length).must_equal 1
+      product_list.each do |single_product|
+        expect(single_product).must_be_instance_of FarMar::Product
+        expect(single_product.vendor_id).must_equal vendor_id
+      end
+    end
+    
+    it "returns an array of many products if vendor has many products" do
+      # data =  5,Green Apples,4
+      #         6,Smooth Mushrooms,4
+      #         7,Quaint Beef,4
+      vendor_id = 4
+      product_list = FarMar::Product.find_by_vendor(vendor_id)
+      expect(product_list).must_be_instance_of Array
+      expect(product_list.length).must_equal 3
+      product_list.each do |single_product|
+        expect(single_product).must_be_instance_of FarMar::Product
+        expect(single_product.vendor_id).must_equal vendor_id
+      end
+    end
+    
+  end
+  
 end
