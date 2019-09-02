@@ -1,13 +1,12 @@
 module FarMar
-  class Product
+  class Product < Loadable
     
-    attr_reader :id, :name, :vendor_id
+    attr_reader :name, :vendor_id
     
     def initialize(id, name, vendor_id:)
-      expect_positive_int(id)
+      super(id)
       expect_positive_int(vendor_id)
       
-      @id = id
       @name = name
       @vendor_id = vendor_id
     end
@@ -16,18 +15,16 @@ module FarMar
       Vendor.find(vendor_id)
     end
     
-    def self.all
-      return CSV.read("support/products.csv").map do |line|
-        Product.new(
-          line[0].to_i, #id
-          line[1], #name
-          vendor_id: line[2].to_i
-        )
-      end
+    def self.from_csv_line(line)
+      return Product.new(
+        line[0].to_i, #id
+        line[1], #name
+        vendor_id: line[2].to_i
+      )
     end
     
-    def self.find(product_id)
-      return all.find { |product| product.id == product_id }
+    def self.csv_filename()
+      return "support/products.csv"
     end
     
     def self.find_by_vendor(vendor_id)
