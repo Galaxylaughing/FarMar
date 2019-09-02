@@ -19,7 +19,7 @@ module FarMar
     end
     
     def self.from_csv_line(line)
-      return Market.new(
+      return self.new(
         line[0].to_i, #id
         line[1], #name
         line[2], #address
