@@ -6,7 +6,6 @@ module FarMar
     def initialize(id, name, num_employees:, market_id:)
       super(id)
       
-      @id = id
       @name = name
       @num_employees = num_employees
       @market_id = market_id
